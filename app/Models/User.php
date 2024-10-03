@@ -39,7 +39,7 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function events(): BelongsToMany
     {
-        return $this->belongsToMany(Event::class);
+        return $this->belongsToMany(Event::class)->withTimestamps();
     }
 
     public function isAdmin(): bool
