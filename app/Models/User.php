@@ -2,12 +2,13 @@
 
 namespace App\Models;
 
- use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
- use Illuminate\Database\Eloquent\Relations\BelongsToMany;
- use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Enums\Role as RoleEnum;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -45,6 +46,11 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function isAdmin(): bool
     {
-        return $this->role->name === 'admin';
+        return $this->role->id === RoleEnum::ADMIN->value;
+    }
+
+    public function isMember(Event $event): bool
+    {
+        return $this->events->contains($event);
     }
 }
