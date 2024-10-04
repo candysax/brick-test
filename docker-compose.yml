@@ -25,6 +25,7 @@ services:
         depends_on:
             - pgsql
             - php
+            - node
 
     pgsql:
         image: postgres:17-alpine
