@@ -44,7 +44,7 @@ class RegisteredUserController extends Controller
             'role_id' => Role::CLIENT->value,
         ]);
 
-//        event(new Registered($user));
+        event(new Registered($user));
 
         Auth::login($user);
 
