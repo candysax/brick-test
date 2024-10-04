@@ -14,6 +14,7 @@ class EventFactory extends Factory
         return [
             'name' => fake()->sentence(3),
             'start_time' => fake()->date('Y-m-d H:i:s'),
+            'description' => fake()->text(500),
         ];
     }
 }
