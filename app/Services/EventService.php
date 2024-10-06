@@ -3,10 +3,19 @@
 namespace App\Services;
 
 use App\Models\Event;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 
 class EventService extends Service
 {
+    public function index(): array
+    {
+        return [
+            'allEvents' => $this->builder()->paginate(10),
+            'publicEvents' => $this->builder()->where('is_hidden', false)->paginate(10),
+        ];
+    }
+
     public function store(array $data): Event
     {
         return DB::transaction(function () use ($data) {
@@ -35,5 +44,12 @@ class EventService extends Service
             'link' => $data['event_link'],
             'description' => $data['event_description'],
         ];
+    }
+
+    private function builder(): Builder
+    {
+        return Event::query()
+            ->with('categories', 'users')
+            ->orderBy('start_time');
     }
 }

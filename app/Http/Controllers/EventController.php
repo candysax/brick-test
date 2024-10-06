@@ -14,25 +14,16 @@ use Illuminate\View\View;
 
 class EventController extends Controller
 {
-    public function index(): View
+    public function index(EventService $service): View
     {
-        $events = Event::query()
-            ->with('categories')
-            ->with('users')
-            ->orderBy('start_time');
-
-        return view('events.index', [
-            'allEvents' => $events->paginate(10),
-            'publicEvents' => $events->where('is_hidden', false)->paginate(10),
-        ]);
+        return view('events.index', $service->index());
     }
 
     public function indexPersonal(): View
     {
         $events = auth()->user()
             ->events()
-            ->with('categories')
-            ->with('users')
+            ->with('categories', 'users')
             ->orderBy('start_time')
             ->paginate(10);
 
