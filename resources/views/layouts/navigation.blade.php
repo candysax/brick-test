@@ -15,10 +15,21 @@
                     <x-nav-link :href="route('events.index')" :active="request()->routeIs('events.index')">
                         Мероприятия
                     </x-nav-link>
+                    @if(auth()->user()?->isAdmin())
+                        <x-nav-link :href="route('events.index')" :active="request()->routeIs('')">
+                            Категории
+                        </x-nav-link>
+                    @endif
+                    @if(auth()->user()?->isAdmin())
+                        <x-nav-link :href="route('events.index')" :active="request()->routeIs('')">
+                            Клиенты
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
+            @auth
             <div class="hidden sm:flex sm:items-center sm:ms-6">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
@@ -34,6 +45,9 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <x-dropdown-link :href="route('events.index.personal')">
+                            Мои мероприятия
+                        </x-dropdown-link>
                         <x-dropdown-link :href="route('profile.edit')">
                             Профиль
                         </x-dropdown-link>
@@ -51,6 +65,23 @@
                     </x-slot>
                 </x-dropdown>
             </div>
+            @endauth
+            @guest
+                <div class="hidden sm:flex sm:items-center sm:ms-6">
+                    <a
+                        href="{{ route('login') }}"
+                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                    >
+                        Вход
+                    </a>
+                    <a
+                        href="{{ route('register') }}"
+                        class="rounded-md px-3 py-2 text-black ring-1 ring-transparent transition hover:text-black/70 focus:outline-none focus-visible:ring-[#FF2D20] dark:text-white dark:hover:text-white/80 dark:focus-visible:ring-white"
+                    >
+                        Регистрация
+                    </a>
+                </div>
+            @endguest
 
             <!-- Hamburger -->
             <div class="-me-2 flex items-center sm:hidden">
@@ -70,9 +101,20 @@
             <x-responsive-nav-link :href="route('events.index')" :active="request()->routeIs('events.index')">
                 Мероприятия
             </x-responsive-nav-link>
+            @if(auth()->user()?->isAdmin())
+                <x-responsive-nav-link :href="route('events.index')" :active="request()->routeIs('')">
+                    Категории
+                </x-responsive-nav-link>
+            @endif
+            @if(auth()->user()?->isAdmin())
+                <x-responsive-nav-link :href="route('events.index')" :active="request()->routeIs('')">
+                    Клиенты
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
+        @auth
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
@@ -80,6 +122,9 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                <x-responsive-nav-link :href="route('events.index.personal')">
+                    Мои мероприятия
+                </x-responsive-nav-link>
                 <x-responsive-nav-link :href="route('profile.edit')">
                     Профиль
                 </x-responsive-nav-link>
@@ -96,5 +141,16 @@
                 </form>
             </div>
         </div>
+        @endauth
+        @guest
+            <div class="pt-2 pb-2 border-t border-gray-200 space-y-1">
+                <x-responsive-nav-link :href="route('login')">
+                    Вход
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('register')">
+                    Регистрация
+                </x-responsive-nav-link>
+            </div>
+        @endguest
     </div>
 </nav>

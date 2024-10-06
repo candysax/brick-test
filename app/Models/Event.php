@@ -14,6 +14,11 @@ class Event extends Model
 
     protected $guarded = [];
 
+    protected $casts = [
+        'is_hidden' => 'boolean',
+        'start_time' => 'datetime',
+    ];
+
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(Category::class)->withTimestamps();
@@ -24,10 +29,20 @@ class Event extends Model
         return $this->belongsToMany(User::class);
     }
 
+    public function isHidden(): bool
+    {
+        return $this->is_hidden;
+    }
+
+    public function formatedStartTime()
+    {
+        return $this->start_time->format('d.m.Y H:i');
+    }
+
     protected function startTime(): Attribute
     {
         return Attribute::make(
-            get: fn ($value) => Carbon::parse($value)->format('d.m.Y H:i'),
+            get: fn ($value) => $value ? Carbon::parse($value) : null,
         );
     }
 }

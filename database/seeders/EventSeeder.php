@@ -18,7 +18,7 @@ class EventSeeder extends Seeder
         $users = User::all();
         $categories = Category::all();
 
-        Event::factory(4)
+        Event::factory(20)
             ->create()
             ->each(function (Event $event) use ($users, $categories) {
                 $event->users()->attach($users->random(3)->pluck('id')->toArray());

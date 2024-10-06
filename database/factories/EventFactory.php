@@ -13,7 +13,8 @@ class EventFactory extends Factory
     {
         return [
             'name' => fake()->sentence(3),
-            'start_time' => fake()->date('Y-m-d H:i:s'),
+            'start_time' => fake()->dateTimeBetween('now', '+1 year'),
+            'link' => fake()->url(),
             'description' => fake()->text(500),
         ];
     }
