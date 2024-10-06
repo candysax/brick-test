@@ -24,5 +24,5 @@
     <br>
     <br>
 
-    <x-events.event-join-button :event="$event" />
+    <x-events.join-button :event="$event" />
 </section>

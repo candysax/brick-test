@@ -21,7 +21,7 @@
         </thead>
         <tbody>
         @foreach($events as $event)
-            <x-events.event-table-item :event="$event" />
+            <x-events.table-item :event="$event" />
         @endforeach
         </tbody>
     </table>

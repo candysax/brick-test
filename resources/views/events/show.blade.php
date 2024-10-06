@@ -7,7 +7,7 @@
             <div class="flex items-center space-x-2">
                 <a href="{{ route('events.edit', [$event]) }}"><x-secondary-button>Изменить</x-secondary-button></a>
 
-                <x-events.event-toggle-button :event="$event" />
+                <x-events.toggle-button :event="$event" />
             </div>
         @endif
     </x-slot>

@@ -13,7 +13,7 @@
 
         <tbody>
         @foreach($categories as $category)
-            <x-categories.category-table-item :category="$category" />
+            <x-categories.table-item :category="$category" />
         @endforeach
         </tbody>
     </table>

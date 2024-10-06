@@ -40,7 +40,7 @@
 
         <div>
             <p class="block font-medium text-sm text-gray-700">Категории</p>
-            <x-events.event-category-select name="event_categories[]" :categories="$categories" :event="$event ?? null" class="mt-1" />
+            <x-events.category-select name="event_categories[]" :categories="$categories" :event="$event ?? null" class="mt-1" />
         </div>
 
         <div class="flex items-center gap-4">
