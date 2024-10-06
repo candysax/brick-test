@@ -26,7 +26,7 @@
         </tbody>
     </table>
 
-    @if(method_exists($events, 'links'))
+    @if(method_exists($events, 'links') && $events->hasPages())
         <div class="px-6 py-4">
             {{ $events->links() }}
         </div>
