@@ -3,16 +3,18 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Enums\Role as RoleEnum;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable;
+    use HasFactory, SoftDeletes, Notifiable;
 
     protected $fillable = [
         'name',
@@ -31,6 +33,7 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_banned' => 'boolean',
         ];
     }
 
@@ -52,5 +55,41 @@ class User extends Authenticatable implements MustVerifyEmail
     public function isMember(Event $event): bool
     {
         return $this->events->contains($event);
+    }
+
+    public function ban(): User
+    {
+        $this->is_banned = true;
+
+        return $this;
+    }
+
+    public function unban(): User
+    {
+        $this->is_banned = false;
+
+        return $this;
+    }
+
+    public function scopeNotAdmin(Builder $query): void
+    {
+        $query->where('role_id', '<>', RoleEnum::ADMIN->value);
+    }
+
+    public function scopeBanned(Builder $query): void
+    {
+        $query->where('is_banned', true);
+    }
+
+    public function scopeNotBanned(Builder $query): void
+    {
+        $query->where('is_banned', false);
+    }
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope('not_banned', function (Builder $builder) {
+            $builder->notBanned();
+        });
     }
 }

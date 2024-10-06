@@ -21,7 +21,7 @@
                         </x-nav-link>
                     @endif
                     @if(auth()->user()?->isAdmin())
-                        <x-nav-link :href="route('events.index')" :active="request()->routeIs('')">
+                        <x-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                             Клиенты
                         </x-nav-link>
                     @endif
