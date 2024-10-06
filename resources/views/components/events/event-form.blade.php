@@ -16,19 +16,19 @@
 
         <div>
             <x-input-label for="event_name" value="Название *" />
-            <x-text-input id="event_name" name="event_name" type="text" class="mt-1 block w-full" :value="old('event_name', $event?->name)" required autofocus autocomplete="event_name" />
+            <x-text-input id="event_name" name="event_name" type="text" class="mt-1 block w-full" :value="old('event_name', $event?->name)" required autofocus />
             <x-input-error class="mt-2" :messages="$errors->get('event_name')" />
         </div>
 
         <div>
             <x-input-label for="event_start_time" value="Дата начала *" />
-            <x-datetime-input id="event_start_time" name="event_start_time" type="text" class="mt-1 block w-full" :value="old('event_start_time', $event?->start_time->format('Y-m-d\TH:i'))" autocomplete="event_start_time" />
+            <x-datetime-input id="event_start_time" name="event_start_time" type="text" class="mt-1 block w-full" :value="old('event_start_time', $event?->start_time->format('Y-m-d\TH:i'))" />
             <x-input-error class="mt-2" :messages="$errors->get('event_start_time')" />
         </div>
 
         <div>
             <x-input-label for="event_link" value="Ссылка" />
-            <x-text-input id="event_link" name="event_link" type="text" class="mt-1 block w-full" :value="old('event_link', $event?->link)" autocomplete="event_link" />
+            <x-text-input id="event_link" name="event_link" type="text" class="mt-1 block w-full" :value="old('event_link', $event?->link)" />
             <x-input-error class="mt-2" :messages="$errors->get('event_link')" />
         </div>
 
