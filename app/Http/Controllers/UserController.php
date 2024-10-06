@@ -10,9 +10,9 @@ use Illuminate\View\View;
 
 class UserController extends Controller
 {
-    public function index(Request $request, UserService $service): View
+    public function index(UserService $service): View
     {
-        return view('users.index', $service->index($request));
+        return view('users.index', $service->index());
     }
 
     public function ban(User $user): RedirectResponse
