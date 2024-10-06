@@ -16,7 +16,7 @@
                         Мероприятия
                     </x-nav-link>
                     @if(auth()->user()?->isAdmin())
-                        <x-nav-link :href="route('events.index')" :active="request()->routeIs('')">
+                        <x-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
                             Категории
                         </x-nav-link>
                     @endif

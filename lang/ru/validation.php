@@ -35,6 +35,7 @@ $ru = [
         'event_start_time' => 'дата начала',
         'event_link' => 'ссылка',
         'event_description' => 'описание события',
+        'category_name' => 'название категории',
     ],
 ];
 
