@@ -44,7 +44,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <a href="{{ route('events.index') }}"><x-secondary-button>Отменить</x-secondary-button></a>
+            <a href="{{ $event ? route('events.show', [$event]) : route('events.index') }}"><x-secondary-button>Отменить</x-secondary-button></a>
             <x-primary-button type="submit">Сохранить</x-primary-button>
         </div>
     </form>
