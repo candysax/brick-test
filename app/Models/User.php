@@ -11,10 +11,12 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Enums\Role as RoleEnum;
+use Laravel\Scout\Attributes\SearchUsingFullText;
+use Laravel\Scout\Searchable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, SoftDeletes, Notifiable;
+    use HasFactory, SoftDeletes, Notifiable, Searchable;
 
     protected $fillable = [
         'name',
@@ -91,5 +93,14 @@ class User extends Authenticatable implements MustVerifyEmail
         static::addGlobalScope('not_banned', function (Builder $builder) {
             $builder->notBanned();
         });
+    }
+
+    #[SearchUsingFullText(['name', 'email'])]
+    public function toSearchableArray(): array
+    {
+        return [
+            'name' => $this->name,
+            'email' => $this->email,
+        ];
     }
 }
