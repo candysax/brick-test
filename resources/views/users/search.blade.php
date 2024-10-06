@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Клиенты
+            Поиск по клиентам
         </h2>
     </x-slot>
 
@@ -9,8 +9,9 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <form action="{{ route('users.index') }}" method="GET" class="p-6 w-full flex space-x-4">
-                    <x-text-input name="search" placeholder="Введите запрос..." class="flex-1" />
-                    <x-primary-button>Поиск</x-primary-button>
+                    <x-text-input name="search" placeholder="Введите запрос..." class="flex-1" value="{{ $searchQuery }}" />
+                    <x-primary-button type="submit">Поиск</x-primary-button>
+                    <a href="{{ route('users.index') }}" class="inline-flex"><x-secondary-button type="button">Отмена</x-secondary-button></a>
                 </form>
             </div>
         </div>
@@ -18,13 +19,6 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <x-users.table :users="$users" />
-            </div>
-        </div>
-
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <h2 class="text-xl px-6 py-5 font-semibold">Заблокированные</h2>
-                <x-users.table :users="$bannedUsers" />
             </div>
         </div>
     </div>

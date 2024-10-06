@@ -13,17 +13,25 @@ class UserService extends Service
     public function index(): array
     {
         $users = $this->getPaginatedUsers('users', function () {
-            return $this->builder()->notBanned();
+            return $this->builder();
         });
 
         $bannedUsers = $this->getPaginatedUsers('banned', function () {
             return $this->builder()->withoutGlobalScope('not_banned')->banned();
         });
 
-        return [
-            'users' => $users,
-            'bannedUsers' => $bannedUsers
-        ];
+        return compact('users', 'bannedUsers');
+    }
+
+    public function search(string $searchQuery): array
+    {
+        $users = User::search($searchQuery)->query(function (Builder $query) {
+                return $query->withoutGlobalScope('not_banned')->orderBy('created_at', 'DESC')
+                    ->where('id', '<>', auth()->user()->id)
+                    ->notAdmin();
+        })->paginate(self::USERS_PER_PAGE);
+
+        return compact('users', 'searchQuery');
     }
 
     private function builder(): Builder
