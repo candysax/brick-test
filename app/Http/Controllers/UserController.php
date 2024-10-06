@@ -35,9 +35,9 @@ class UserController extends Controller
         return back();
     }
 
-    public function destroy(User $user): RedirectResponse
+    public function destroy(int $user): RedirectResponse
     {
-        $user->delete();
+        User::query()->withoutGlobalScope('not_banned')->find($user)->delete();
 
         return back();
     }
