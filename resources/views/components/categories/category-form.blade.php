@@ -20,7 +20,7 @@
             <x-input-error class="mt-2" :messages="$errors->get('category_name')" />
         </div>
         <div class="flex items-center gap-4">
-            <a href="{{ url()->previous() }}"><x-secondary-button>Отменить</x-secondary-button></a>
+            <a href="{{ route('categories.index') }}"><x-secondary-button>Отменить</x-secondary-button></a>
             <x-primary-button type="submit">Сохранить</x-primary-button>
         </div>
     </form>
