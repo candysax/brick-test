@@ -4,7 +4,7 @@
             {{ $event->name }}
         </h2>
         @if(auth()->user()?->isAdmin())
-            <div class="flex items-center space-x-2">
+            <div class="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-2">
                 <a href="{{ route('events.edit', [$event]) }}"><x-secondary-button>Изменить</x-secondary-button></a>
 
                 <x-events.toggle-button :event="$event" />
