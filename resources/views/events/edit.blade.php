@@ -1,4 +1,6 @@
 <x-app-layout>
+    <x-slot name="title">Изменить мероприятие</x-slot>
+
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ $event->name }}

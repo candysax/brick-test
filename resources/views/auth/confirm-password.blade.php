@@ -1,4 +1,6 @@
 <x-guest-layout>
+    <x-slot name="title">Подтверждение</x-slot>
+
     <div class="mb-4 text-sm text-gray-600">
         Пожалуйста, подтвердите свой пароль, прежде чем продолжить.
     </div>
