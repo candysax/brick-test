@@ -102,12 +102,12 @@
                 Мероприятия
             </x-responsive-nav-link>
             @if(auth()->user()?->isAdmin())
-                <x-responsive-nav-link :href="route('events.index')" :active="request()->routeIs('')">
+                <x-responsive-nav-link :href="route('categories.index')" :active="request()->routeIs('categories.index')">
                     Категории
                 </x-responsive-nav-link>
             @endif
             @if(auth()->user()?->isAdmin())
-                <x-responsive-nav-link :href="route('events.index')" :active="request()->routeIs('')">
+                <x-responsive-nav-link :href="route('users.index')" :active="request()->routeIs('users.index')">
                     Клиенты
                 </x-responsive-nav-link>
             @endif
