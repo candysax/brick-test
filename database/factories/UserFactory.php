@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Role;
+use App\Enums\Role;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
@@ -35,14 +35,14 @@ class UserFactory extends Factory
     public function admin(): static
     {
         return $this->state(fn (array $attributes) => [
-            'role_id' => Role::query()->where('name', 'admin')->firstOrFail()->id,
+            'role_id' => Role::ADMIN->value,
         ]);
     }
 
     public function client(): static
     {
         return $this->state(fn (array $attributes) => [
-            'role_id' => Role::query()->where('name', 'client')->firstOrFail()->id,
+            'role_id' => Role::CLIENT->value,
         ]);
     }
 }

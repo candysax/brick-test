@@ -17,15 +17,12 @@ class UserSeeder extends Seeder
     {
         $roles = Role::all();
 
-        User::factory(1)->state([
+        User::factory(1)->admin()->state([
             'name' => 'admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('123456'),
-            'role_id' => $roles->where('name', 'admin')->firstOrFail()->id,
         ])->create();
 
-        User::factory(16)->state([
-            'role_id' => $roles->where('name', 'client')->firstOrFail()->id,
-        ])->create();
+        User::factory(16)->client()->create();
     }
 }
